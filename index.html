@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sérum Ongles – Commande</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
+    h1 {
+      color: #008080;
+    }
+    .container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 600px;
+      margin: auto;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #008080;
+      color: white;
+      border: none;
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:disabled {
+      background-color: gray;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Commande Sérum Ongles</h1>
+    <p>Ce sérum fait <strong>pousser et blanchir les ongles</strong> en 7 jours. Livraison gratuite et rapide.</p>
+    <form id="orderForm">
+      <label for="nom">Nom complet :</label>
+      <input type="text" id="nom" placeholder="Entrez votre nom" required />
+
+      <label for="ville">Ville (adresse si possible) :</label>
+      <input type="text" id="ville" placeholder="Votre ville + adresse" required />
+
+      <label for="telephone">Numéro de téléphone :</label>
+      <input type="tel" id="telephone" placeholder="Ex: +229XXXXXXXX" required />
+
+      <button type="submit" id="commandeBtn" disabled>Commander maintenant</button>
+    </form>
+  </div>
+
+  <script>
+    const nom = document.getElementById("nom");
+    const ville = document.getElementById("ville");
+    const tel = document.getElementById("telephone");
+    const btn = document.getElementById("commandeBtn");
+
+    function checkForm() {
+      if (nom.value.trim() && ville.value.trim() && tel.value.trim()) {
+        btn.disabled = false;
+      } else {
+        btn.disabled = true;
+      }
+    }
+
+    nom.addEventListener("input", checkForm);
+    ville.addEventListener("input", checkForm);
+    tel.addEventListener("input", checkForm);
+
+    document.getElementById("orderForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const message = `Bonjour, je m'appelle ${nom.value}. Je souhaite commander le sérum pour les ongles. Je suis à ${ville.value}. Voici mon numéro : ${tel.value}.`;
+      const whatsappURL = `https://wa.me/2290145035665?text=${encodeURIComponent(message)}`;
+      window.open(whatsappURL, "_blank");
+    });
+  </script>
+</body>
+  </html>
